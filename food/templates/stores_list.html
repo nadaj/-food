@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <div class="list-group">
+        {% if stores %}
+        {% for store in stores %}
+        <div id="product-listed" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex row">
+                <div class="col-12 col-md-1 offset-lg-1 p-2 align-self-center textcenter">
+                    <a href="/stores/{{ store.id }}">
+                        <img name="product-img" id="product-img" src="{{store.image}}" alt="No image."/>
+                    </a>
+                </div>
+                <div class="col-12 col-md-9 offset-md-1 offset-lg-0 p-2 w-100">
+                    <div class="d-flex w-100 justify-content-between">
+                        <a href="/stores/{{ store.id }}">
+                            <h5 id="product-name" class="mb-1">{{store.name}}</h5>
+                        </a>
+                    </div>
+                    <p class="mb-1">{{store.description_truncate}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

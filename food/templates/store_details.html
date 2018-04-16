@@ -1,0 +1,77 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-9 col-md-5">
+            <img class="card-img-top mt-2" src="{{ store.image }}" alt="No image.">
+        </div>
+
+        <div class="col-12 col-md-7">
+            <div class="mt-md-2 mt-lg-4">
+                <div class="card-body ">
+                    <div class="d-flex flex-wrap w-100 justify-content-between">
+                        <h5 class="card-title mt-1" style="margin-bottom:0px">{{ store.name }}</h5>
+                        <small class="text-muted pale-green">
+                            <div class="star-rating">
+                                <span class="fa fa-star-o" data-rating="1"></span>
+                                <span class="fa fa-star-o" data-rating="2"></span>
+                                <span class="fa fa-star-o" data-rating="3"></span>
+                                <span class="fa fa-star-o" data-rating="4"></span>
+                                <span class="fa fa-star-o" data-rating="5"></span>
+                                <input type="hidden" name="rating-store-value" class="rating-value" value="5">
+                            </div>
+                        </small>
+                    </div>
+                    <p class="card-text mt-2">{{ store.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion py-4" id="stores_accordion">
+        <div class="card mb-1">
+            <div class="card-header" id="locations_header">
+                <h5 class="mb-0 pale-green">
+                    <button class="btn btn-link avogreen-col" type="button" data-toggle="collapse"
+                            data-target="#locations_collapse"
+                            aria-expanded="true" aria-controls="locations_collapse">
+                        Locations
+                    </button>
+                </h5>
+            </div>
+
+            <div id="locations_collapse" class="collapse" aria-labelledby="locations_header"
+                 data-parent="#stores_accordion">
+                <div class="card-body">
+                    <p>dsfsdf</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" id="products_header">
+                <h5 class="mb-0 pale-green">
+                    <button class="btn btn-link avogreen-col" type="button" data-toggle="collapse"
+                            data-target="#products_collapse"
+                            aria-expanded="true" aria-controls="products_collapse">
+                        Available products
+                    </button>
+                </h5>
+            </div>
+
+            <div id="products_collapse" class="collapse" aria-labelledby="products_header"
+                 data-parent="#stores_accordion">
+                <div class="card-body">
+                    <p>fsdf</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascript_files %}
+<script src="{% static 'js/generic.js' %}"></script>
+{% endblock %}

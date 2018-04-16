@@ -1,0 +1,281 @@
+body {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+header.masthead {
+  position: relative;
+  background-color: #306412;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+header.masthead .overlay {
+  position: absolute;
+  background-color: #212529;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+}
+
+header.masthead h1 {
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  header.masthead {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+  }
+  header.masthead h1 {
+    font-size: 3rem;
+  }
+}
+
+.showcase .showcase-text {
+  padding: 3rem;
+}
+
+.showcase .showcase-img {
+  min-height: 30rem;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .showcase .showcase-text {
+    padding: 7rem;
+  }
+}
+
+.features-icons {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.features-icons .features-icons-item {
+  max-width: 20rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon {
+  height: 7rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon i {
+  font-size: 4.5rem;
+}
+
+.features-icons .features-icons-item:hover .features-icons-icon i {
+  font-size: 5rem;
+}
+
+.testimonials {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.testimonials .testimonial-item {
+  max-width: 18rem;
+}
+
+.testimonials .testimonial-item img {
+  max-width: 12rem;
+  box-shadow: 0px 5px 5px 0px #adb5bd;
+}
+
+.call-to-action {
+  position: relative;
+  background-color: #306412;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.call-to-action .overlay {
+  position: absolute;
+  background-color: #212529;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+}
+
+p.text-muted {
+  color:#ffffff!important;
+}
+
+.food-logo {
+    height: auto;
+    width: auto;
+    max-height: 50px;
+    max-width: 250px;
+}
+
+.footer-rights {
+    padding-top:1rem
+}
+
+#main-toggler:focus {
+    outline: 5px auto #98b289
+}
+
+/****************************************
+*****           FOOTER              *****
+****************************************/
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 160px; /* Margin bottom by footer height */
+}
+
+footer.footer {
+  position: absolute;
+  bottom: 0;
+  width:100%;
+  height:160px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  color:#ffffff!important;
+}
+
+@media (min-width: 992px) {
+  body {
+    margin-bottom: 120px; /* Margin bottom by footer height */
+  }
+
+  footer.footer {
+    height:120px;
+  }
+}
+
+.textcenter {
+  text-align:center
+}
+/****************************************
+*****           COLORS              *****
+****************************************/
+
+.avogreen-col {
+  color: #306412!important;
+}
+
+.white-col {
+  color: #ffffff!important;
+}
+
+.pale-green, a.avogreen-col:hover {
+  color:#97c94d!important;
+}
+
+.error-red {
+  color:#c8180d!important;
+}
+
+/****************************************
+*****       PRODUCT-SEARCH          *****
+****************************************/
+
+#product-img {
+  height: 80px;
+  width: 100px;
+}
+
+a.nav-link.avogreen-col {
+  color: #ffffff!important;
+}
+
+a.nav-link:hover {
+  color: #9ad14b!important;
+}
+
+.fa:hover {
+  color: #9ad14b!important;
+}
+
+.bg-light {
+  background-color: #306412!important;
+}
+
+#product-listed:hover {
+  background-color: #9ad14b61!important;
+}
+
+#product-name {
+  color:#495057!important;
+}
+
+#product-name:hover {
+  color:#495057!important;
+  text-decoration:underline;
+}
+
+/****************************************
+*****  PRODUCT-DETAILS - CAROUSEL    ****
+****************************************/
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  background-size: 100%, 100%;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: #212529;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: #212529;
+}
+
+/****************************************
+*****  PRODUCT-DETAILS - SPECIALTY    ****
+****************************************/
+
+.specialty-img {
+  width: 50%;
+}
+
+/****************************************
+*****   PRODUCT-DETAILS - OTHER      ****
+****************************************/
+
+.star-rating {
+  line-height:32px;
+  font-size:1.25em;
+}
+
+.star-rating .fa-star{
+  color: #306412;
+}
+
+.top-border-list {
+  border-top:1px solid rgba(0,0,0,.125);
+}

@@ -1,0 +1,197 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-9 col-md-5">
+            <img class="card-img-top mt-2" src="{{ product.image }}" alt="No image.">
+        </div>
+        <div class="col-12 col-md-7">
+            <div class="mt-md-2 mt-lg-4">
+                <div class="card-body ">
+                    <div class="d-flex flex-wrap w-100 justify-content-between">
+                        <h5 class="card-title mt-1" style="margin-bottom:0px">{{ product.name }}</h5>
+                        <small class="text-muted pale-green">
+                            <div class="star-rating">
+                                <span class="fa fa-star-o" data-rating="1"></span>
+                                <span class="fa fa-star-o" data-rating="2"></span>
+                                <span class="fa fa-star-o" data-rating="3"></span>
+                                <span class="fa fa-star-o" data-rating="4"></span>
+                                <span class="fa fa-star-o" data-rating="5"></span>
+                                <input type="hidden" name="rating-product-value" class="rating-value" value="5">
+                            </div>
+                        </small>
+                    </div>
+
+                    {% if product_in_stores %}
+                    <small class="text-muted pale-green">
+                        Availability: In stock
+                    </small>
+                    {% else %}
+                    <small class="text-muted error-red">
+                        Availability: Out-of-stock
+                    </small>
+                    {% endif %}
+                    <p class="card-text mt-2">{{ product.description }}</p>
+                </div>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item top-border-list">
+                        <table class="card-text">
+                            <tr>
+                                <td><b>Barcode:</b></td>
+                                <td>{{ product.barcode }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Brand:</b></td>
+                                <td>{{ product.brand.name }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Department:</b></td>
+                                <td>
+                                    {% if departments and departments.0 is not None %}
+                                    <a href="#">{{ departments.0.name }}</a>
+                                    {% endif %}
+                                    {% for department in departments|slice:"1:" %}
+                                    > <a href="#">{{ department.name }}</a>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Weight:</b></td>
+                                <td>{{ product.quantity_in_kilo }}kg / {{ product.metric_to_pounds }}lb</td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            {% if product.productspecialty.organic %}
+                            <div class="col-3" align="center">
+                                <img class="specialty-img" src="{% static 'images/specialties/organic.svg' %}"
+                                     alt="Organic"><br>
+                                <small>Organic</small>
+                            </div>
+                            {% endif %}
+                            {% if product.productspecialty.vegan %}
+                            <div class="col-3" align="center">
+                                <img class="specialty-img" src="{% static 'images/specialties/vegan.svg' %}"
+                                     alt="Vegan"><br>
+                                <small>Vegan</small>
+                            </div>
+                            {% endif %}
+                            {% if product.productspecialty.vegetarian %}
+                            <div class="col-3" align="center">
+                                <img class="specialty-img" src="{% static 'images/specialties/vegetarian.svg' %}"
+                                     alt="Vegetarian"><br>
+                                <small>Vegetarian</small>
+                            </div>
+                            {% endif %}
+                            {% if product.productspecialty.kosher %}
+                            <div class="col-3" align="center">
+                                <img class="specialty-img" src="{% static 'images/specialties/kosher.svg' %}"
+                                     alt="Kosher"><br>
+                                <small>Kosher</small>
+                            </div>
+                            {% endif %}
+                            {% if product.productspecialty.gluten_free %}
+                            <div class="col-3" align="center">
+                                <img class="specialty-img" src="{% static 'images/specialties/gluten-free.svg' %}"
+                                     alt="Gluten free"><br>
+                                <small>Gluten free</small>
+                            </div>
+                            {% endif %}
+                            {% if product.productspecialty.dairy_free %}
+                            <div class="col-3" align="center">
+                                <img class="specialty-img" src="{% static 'images/specialties/dairyfree.svg' %}"
+                                     alt="Dairy free"><br>
+                                <small>Dairy free</small>
+                            </div>
+                            {% endif %}
+                            {% if product.productspecialty.low_fat %}
+                            <div class="col-3" align="center">
+                                <img class="specialty-img" src="{% static 'images/specialties/lowfat.svg' %}"
+                                     alt="Low fat"><br>
+                                <small>Low fat</small>
+                            </div>
+                            {% endif %}
+                            {% if product.productspecialty.sugar_free %}
+                            <div class="col-3" align="center">
+                                <img class="specialty-img" src="{% static 'images/specialties/sugarfree.svg' %}"
+                                     alt="Sugar free"><br>
+                                <small>Sugar free</small>
+                            </div>
+                            {% endif %}
+                            {% if product.productspecialty.keto %}
+                            <div class="col-3" align="center">
+                                <img class="specialty-img" src="{% static 'images/specialties/keto.svg' %}"
+                                     alt="Ketogenic"><br>
+                                <small>Ketogenic</small>
+                            </div>
+                            {% endif %}
+                            {% if product.productspecialty.paleo %}
+                            <div class="col-3" align="center">
+                                <img class="specialty-img" src="{% static 'images/specialties/paleo.svg' %}"
+                                     alt="Paleo"><br>
+                                <small>Paleo</small>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% if product_in_stores %}
+    <div class="accordion py-4" id="products_accordion">
+        <div class="card">
+            <div class="card-header" id="availability_header">
+                <h5 class="mb-0 pale-green">
+                    <button class="btn btn-link avogreen-col" type="button" data-toggle="collapse"
+                            data-target="#store_availability_collapse"
+                            aria-expanded="true" aria-controls="store_availability_collapse">
+                        Store availability
+                    </button>
+                </h5>
+            </div>
+
+            <div id="store_availability_collapse" class="collapse" aria-labelledby="availability_header"
+                 data-parent="#products_accordion">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width:50%">Store</th>
+                            <th scope="col" style="width:25%">Price</th>
+                            <th scope="col" style="width:25%">Last updated</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in product_in_stores %}
+                        <tr>
+                            <td>
+                                <a class="card-link avogreen-col" href="/stores/{{ item.store.id }}">
+                                    {{ item.store.name }}
+                                </a>
+                            </td>
+                            {% if item.price_per_kilo %}
+                            <td>${{ item.price }} / kg</td>
+                            {% else %}
+                            <td>${{ item.price }}</td>
+                            {% endif %}
+                            <td>{{ item.updated_at }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block javascript_files %}
+<script src="{% static 'js/generic.js' %}"></script>
+{% endblock %}

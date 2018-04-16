@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+{% load template_filters %}
+{% load static %}
+{% block content %}
+<div>
+    <div class="list-group">
+        {% if products %}
+        {% for product in products %}
+        <div id="product-listed" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex row">
+                <div class="col-12 col-md-1 offset-lg-1 p-2 align-self-center textcenter">
+                    <a href="/products/{{ product.id }}">
+                        <img name="product-img" width="100%" id="product-img" src="{{product.image}}" alt="No image."/>
+                    </a>
+                </div>
+                <div class="col-12 col-md-9 offset-md-1 offset-lg-0 p-2 w-100">
+                    <div class="d-flex w-100 justify-content-between">
+                        <a href="/products/{{ product.id }}">
+                            <h5 id="product-name" class="mb-1">{{product.name}}</h5>
+                        </a>
+                        {% if product.price %}
+                        <small class="text-muted">
+                            ${{ product.price }}
+                        </small>
+                        {% else %}
+                        <small class="text-muted error-red">
+                            Out-of-stock
+                        </small>
+                        {% endif %}
+                    </div>
+                    <small class="text-muted">{{ product.brand_name }}</small>
+                    <p class="mb-1">{{ product.description|description_truncate }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
