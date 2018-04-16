@@ -123,18 +123,40 @@ p.text-muted {
 }
 
 .food-logo {
-    height: auto;
-    width: auto;
-    max-height: 50px;
-    max-width: 250px;
+  height: auto;
+   width: auto;
+   max-height: 50px;
+   max-width: 250px;
 }
 
 .footer-rights {
-    padding-top:1rem
+  padding-top:1rem
 }
 
 #main-toggler:focus {
-    outline: 5px auto #98b289
+  outline: 5px auto #98b289
+}
+
+/****************************************
+***       BASE-GENERIC-SEARCH         ***
+****************************************/
+
+.search-products-bar {
+  display: none;
+}
+
+.search-toggle {
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+#open-search-icon {
+  display: block;
+}
+
+#close-search-icon {
+  display: none;
 }
 
 /****************************************

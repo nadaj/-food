@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.db.models import Min, F
-from food.models import Product, Store, ProductStore, ProductDepartment, ProductBrand
+from food.models import Product, Store, ProductStore, ProductDepartment
 
 
 def index(request):
@@ -9,7 +9,7 @@ def index(request):
 
 
 def all_products(request):
-    search_parameter = request.GET.get('search-param')
+    search_parameter = request.GET.get('search-products-bar')
     products = Product.objects.values('productstore__product_id').annotate(brand_name=F('brand__name'),
                                                                            price=Min('productstore__price'))
     products = products.values()

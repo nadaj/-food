@@ -19,3 +19,21 @@ SetRatingStar();
 $(document).ready(function() {
 
 });
+
+/****************************************
+***       BASE-GENERIC-SEARCH         ***
+****************************************/
+
+$(document).ready(function() {
+  $('.search-products-form').on('click', '.search-toggle', function() {
+    if ($('[name="search-products-bar"]').is(":visible")) {
+      $('[name="search-products-bar"]').css("display", "none");
+      $('[id="close-search-icon"]').css("display", "none");
+      $('[id="open-search-icon"]').css("display", "block");
+    } else {
+      $('[name="search-products-bar"]').css("display", "block");
+      $('[id="open-search-icon"]').css("display", "none");
+      $('[id="close-search-icon"]').css("display", "block");
+    }
+  });
+});
