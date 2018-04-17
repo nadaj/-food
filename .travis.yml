@@ -1,8 +1,0 @@
-# https://travis-ci.com/nadaj/-food
-language: python
-cache:
-  directories:
-    - "$HOME/.cache/pip"
-python:
-  - "3.6.4"
-  - "nightly"
