@@ -10,7 +10,8 @@
             <div class="d-flex row">
                 <div class="col-12 col-md-1 offset-lg-1 p-2 align-self-center textcenter">
                     <a href="/products/{{ product.id }}">
-                        <img name="product-img" width="100%" id="product-img" src="{{product.image}}" alt="No image."/>
+                        <img class="img-fluid img-thumbnail" name="product-img" width="100%"
+                             src="{{product.image}}" alt="No image."/>
                     </a>
                 </div>
                 <div class="col-12 col-md-9 offset-md-1 offset-lg-0 p-2 w-100">
@@ -19,11 +20,11 @@
                             <h5 id="product-name" class="mb-1">{{product.name}}</h5>
                         </a>
                         {% if product.price %}
-                        <small class="text-muted">
+                        <small class="text-muted p-1">
                             ${{ product.price }}
                         </small>
                         {% else %}
-                        <small class="text-muted error-red">
+                        <small class="text-muted error-red p-1">
                             Out-of-stock
                         </small>
                         {% endif %}
