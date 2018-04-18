@@ -27,7 +27,7 @@ def product_details(request, identifier):
     if request.method == 'GET':
         product = Product.objects.get(id=identifier)
         if product:
-            product_in_stores = ProductStore.objects.filter(product_id=identifier)
+            product_in_stores = ProductStore.objects.filter(product_id=identifier).order_by('price')
             query = "SELECT T2.id, T2.name " \
                     "FROM (" \
                     "   SELECT @r AS _id, (SELECT @r := department_id " \

@@ -38,6 +38,17 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item top-border-list">
                         <table class="card-text">
+                            {% if product_in_stores %}
+                            <tr>
+                                <td><b>Price:</b></td>
+                                <td>
+                                    ${{ product_in_stores.0.price }}
+                                    {% if product_in_stores.0.price_per_kilo %}
+                                    per kg
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
                             <tr>
                                 <td><b>Barcode:</b></td>
                                 <td>{{ product.barcode }}</td>
