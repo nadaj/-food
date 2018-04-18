@@ -55,3 +55,11 @@ def store_details(request, identifier):
         return render(request, 'store_details.html', {"store": store})
     else:
         return render(request, 'stores_list.html', {})
+
+
+def show_about(request):
+    return render(request, 'about.html')
+
+
+def show_contact(request):
+    return render(request, 'contact.html')

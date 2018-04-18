@@ -24,4 +24,6 @@ urlpatterns = [
     path('products/', views.all_products, name='products'),
     path('stores/<int:identifier>/', views.store_details, name='store-details'),
     path('stores/', views.all_stores, name='stores'),
+    path('about/', views.show_about, name='about'),
+    path('contact/', views.show_contact, name='contact'),
 ]
