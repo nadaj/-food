@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="container">
+    {{ query }}
     <div class="row justify-content-center">
         <div class="col-9 col-md-5">
             <img class="card-img-top mt-2" src="{{ store.image }}" alt="No image.">
@@ -28,7 +29,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="accordion py-4" id="stores_accordion">
         <div class="card mb-1">
             <div class="card-header" id="locations_header">
@@ -44,7 +45,25 @@
             <div id="locations_collapse" class="collapse" aria-labelledby="locations_header"
                  data-parent="#stores_accordion">
                 <div class="card-body">
-                    <p>dsfsdf</p>
+                    <div class="list-group">
+                        {% for location in locations %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="row mx-1">
+                                {% if location.name %}
+                                <h5 class="mb-1">{{location.name}}</h5>
+                                {% endif %}
+                            </div>
+                            <div class="row mx-1">
+                                <small class="text-muted">{{ location.address }}</small>
+                            </div>
+                            <div class="row mx-1">
+                                <small class="text-muted">{{ location.city.name }},
+                                    {{ location.city.state.abbreviation }} {{ location.zip_code }}
+                                </small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
