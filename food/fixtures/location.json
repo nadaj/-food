@@ -1,0 +1,90 @@
+[
+  {
+    "model": "food.location",
+    "pk": 1,
+    "fields": {
+      "name": "Downtown Miami",
+      "address": "299 SE 3rd Ave",
+      "zip_code": "33131",
+      "city": 1,
+      "store": 1
+    }
+  },
+  {
+    "model": "food.location",
+    "pk": 2,
+    "fields": {
+      "name": "South Beach",
+      "address": "1020 Alton Road",
+      "zip_code": "33139",
+      "city": 2,
+      "store": 1
+    }
+  },
+  {
+    "model": "food.location",
+    "pk": 3,
+    "fields": {
+      "name": "North Miami",
+      "address": "12150 Biscayne Blvd",
+      "zip_code": "33181",
+      "city": 3,
+      "store": 1
+    }
+  },
+  {
+    "model": "food.location",
+    "pk": 4,
+    "fields": {
+      "name": "Dadeland",
+      "address": "7930 SW 104 Street",
+      "zip_code": "33156",
+      "city": 1,
+      "store": 1
+    }
+  },
+  {
+    "model": "food.location",
+    "pk": 5,
+    "fields": {
+      "name": "TJ's Pinecrest (770)",
+      "address": "9205 S Dixie Hwy",
+      "zip_code": "33156",
+      "city": 1,
+      "store": 2
+    }
+  },
+  {
+    "model": "food.location",
+    "pk": 6,
+    "fields": {
+      "name": "",
+      "address": "8760 SW 136th St.",
+      "zip_code": "33176",
+      "city": 1,
+      "store": 3
+    }
+  },
+  {
+    "model": "food.location",
+    "pk": 7,
+    "fields": {
+      "name": "",
+      "address": "1800 West Avenue",
+      "zip_code": "33139",
+      "city": 2,
+      "store": 3
+    }
+  },
+  {
+    "model": "food.location",
+    "pk": 8,
+    "fields": {
+      "name": "",
+      "address": "18299 Biscayne Blvd",
+      "zip_code": "33160",
+      "city": 4,
+      "store": 3
+    }
+  }
+]

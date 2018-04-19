@@ -1,0 +1,402 @@
+[
+  {
+    "model": "food.state",
+    "pk": 74,
+    "fields": {
+      "name": "Alabama",
+      "abbreviation": "AL"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 75,
+    "fields": {
+      "name": "Alaska",
+      "abbreviation": "AK"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 76,
+    "fields": {
+      "name": "Arizona",
+      "abbreviation": "AZ"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 77,
+    "fields": {
+      "name": "Arkansas",
+      "abbreviation": "AR"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 78,
+    "fields": {
+      "name": "California",
+      "abbreviation": "CA"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 79,
+    "fields": {
+      "name": "Colorado",
+      "abbreviation": "CO"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 80,
+    "fields": {
+      "name": "Connecticut",
+      "abbreviation": "CT"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 81,
+    "fields": {
+      "name": "Delaware",
+      "abbreviation": "DE"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 82,
+    "fields": {
+      "name": "Florida",
+      "abbreviation": "FL"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 83,
+    "fields": {
+      "name": "Georgia",
+      "abbreviation": "GA"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 84,
+    "fields": {
+      "name": "Hawaii",
+      "abbreviation": "HI"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 85,
+    "fields": {
+      "name": "Idaho",
+      "abbreviation": "ID"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 86,
+    "fields": {
+      "name": "Illinois",
+      "abbreviation": "IL"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 87,
+    "fields": {
+      "name": "Indiana",
+      "abbreviation": "IN"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 88,
+    "fields": {
+      "name": "Iowa",
+      "abbreviation": "IA"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 89,
+    "fields": {
+      "name": "Kansas",
+      "abbreviation": "KS"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 90,
+    "fields": {
+      "name": "Kentucky",
+      "abbreviation": "KY"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 91,
+    "fields": {
+      "name": "Louisiana",
+      "abbreviation": "LA"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 92,
+    "fields": {
+      "name": "Maine",
+      "abbreviation": "ME"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 93,
+    "fields": {
+      "name": "Maryland",
+      "abbreviation": "MD"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 94,
+    "fields": {
+      "name": "Massachusetts",
+      "abbreviation": "MA"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 95,
+    "fields": {
+      "name": "Michigan",
+      "abbreviation": "MI"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 96,
+    "fields": {
+      "name": "Minnesota",
+      "abbreviation": "MN"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 97,
+    "fields": {
+      "name": "Mississippi",
+      "abbreviation": "MS"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 98,
+    "fields": {
+      "name": "Missouri",
+      "abbreviation": "MO"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 99,
+    "fields": {
+      "name": "Montana",
+      "abbreviation": "MT"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 100,
+    "fields": {
+      "name": "Nebraska",
+      "abbreviation": "NE"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 101,
+    "fields": {
+      "name": "Nevada",
+      "abbreviation": "NV"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 102,
+    "fields": {
+      "name": "New Hampshire",
+      "abbreviation": "NH"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 103,
+    "fields": {
+      "name": "New Jersey",
+      "abbreviation": "NJ"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 104,
+    "fields": {
+      "name": "New Mexico",
+      "abbreviation": "NM"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 105,
+    "fields": {
+      "name": "New York",
+      "abbreviation": "NY"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 106,
+    "fields": {
+      "name": "North Carolina",
+      "abbreviation": "NC"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 107,
+    "fields": {
+      "name": "North Dakota",
+      "abbreviation": "ND"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 108,
+    "fields": {
+      "name": "Ohio",
+      "abbreviation": "OH"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 109,
+    "fields": {
+      "name": "Oklahoma",
+      "abbreviation": "OK"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 110,
+    "fields": {
+      "name": "Oregon",
+      "abbreviation": "OR"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 111,
+    "fields": {
+      "name": "Pennsylvania",
+      "abbreviation": "PA"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 112,
+    "fields": {
+      "name": "Rhode Island",
+      "abbreviation": "RI"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 113,
+    "fields": {
+      "name": "South Carolina",
+      "abbreviation": "SC"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 114,
+    "fields": {
+      "name": "South Dakota",
+      "abbreviation": "SD"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 115,
+    "fields": {
+      "name": "Tennessee",
+      "abbreviation": "TN"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 116,
+    "fields": {
+      "name": "Texas",
+      "abbreviation": "TX"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 117,
+    "fields": {
+      "name": "Utah",
+      "abbreviation": "UT"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 118,
+    "fields": {
+      "name": "Vermont",
+      "abbreviation": "VT"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 119,
+    "fields": {
+      "name": "Virginia",
+      "abbreviation": "VA"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 120,
+    "fields": {
+      "name": "Washington",
+      "abbreviation": "WA"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 121,
+    "fields": {
+      "name": "West Virginia",
+      "abbreviation": "WV"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 122,
+    "fields": {
+      "name": "Wisconsin",
+      "abbreviation": "WI"
+    }
+  },
+  {
+    "model": "food.state",
+    "pk": 123,
+    "fields": {
+      "name": "Wyoming",
+      "abbreviation": "WY"
+    }
+  }
+]

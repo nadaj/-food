@@ -1,0 +1,34 @@
+[
+  {
+    "model": "food.city",
+    "pk": 1,
+    "fields": {
+      "name": "Miami",
+      "state": 82
+    }
+  },
+  {
+    "model": "food.city",
+    "pk": 2,
+    "fields": {
+      "name": "Miami Beach",
+      "state": 82
+    }
+  },
+  {
+    "model": "food.city",
+    "pk": 3,
+    "fields": {
+      "name": "North Miami",
+      "state": 82
+    }
+  },
+  {
+    "model": "food.city",
+    "pk": 4,
+    "fields": {
+      "name": "Aventura",
+      "state": 82
+    }
+  }
+]

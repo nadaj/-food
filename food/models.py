@@ -58,6 +58,24 @@ class Store(models.Model):
                              default='https://s3.amazonaws.com/nadaj-food/store_images/No_Image_Available.gif')
 
 
+class State(models.Model):
+    name = models.CharField(max_length=15, unique=True)
+    abbreviation = models.CharField(max_length=2, unique=True)
+
+
+class City(models.Model):
+    name = models.CharField(max_length=50)
+    state = models.ForeignKey(State, on_delete=models.CASCADE, null=True)
+
+
+class Location(models.Model):
+    name = models.CharField(max_length=100, blank=True)
+    address = models.CharField(max_length=128)
+    zip_code = models.CharField(max_length=5)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+
+
 class ProductStore(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
