@@ -32,15 +32,11 @@
 
     <div class="accordion py-4" id="stores_accordion">
         <div class="card mb-1">
-            <div class="card-header" id="locations_header">
-                <h5 class="mb-0 pale-green">
-                    <button class="btn btn-link avogreen-col" type="button" data-toggle="collapse"
-                            data-target="#locations_collapse"
-                            aria-expanded="true" aria-controls="locations_collapse">
-                        Locations
-                    </button>
-                </h5>
-            </div>
+            <button class="btn btn-link avogreen-col" type="button" data-toggle="collapse"
+                    data-target="#locations_collapse"
+                    aria-expanded="true" aria-controls="locations_collapse">
+                <h5 class="my-1">Locations</h5>
+            </button>
 
             <div id="locations_collapse" class="collapse" aria-labelledby="locations_header"
                  data-parent="#stores_accordion">
@@ -50,16 +46,21 @@
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="row mx-1">
                                 {% if location.name %}
-                                <h5 class="mb-1">{{location.name}}</h5>
+                                <h5 class="mb-1">{{ location.name }}</h5>
                                 {% endif %}
                             </div>
-                            <div class="row mx-1">
+                            <div class="row mx-1 mt-1">
                                 <small class="text-muted">{{ location.address }}</small>
                             </div>
                             <div class="row mx-1">
                                 <small class="text-muted">{{ location.city.name }},
                                     {{ location.city.state.abbreviation }} {{ location.zip_code }}
                                 </small>
+                            </div>
+                            <div class="row mx-1 mt-2">
+                                {% if location.phone %}
+                                <small class="text-muted"><b>Phone:</b> {{ location.phone }}</small>
+                                {% endif %}
                             </div>
                         </div>
                         {% endfor %}
@@ -69,15 +70,11 @@
         </div>
 
         <div class="card">
-            <div class="card-header" id="products_header">
-                <h5 class="mb-0 pale-green">
-                    <button class="btn btn-link avogreen-col" type="button" data-toggle="collapse"
-                            data-target="#products_collapse"
-                            aria-expanded="true" aria-controls="products_collapse">
-                        Available products
-                    </button>
-                </h5>
-            </div>
+            <button class="btn btn-link avogreen-col" type="button" data-toggle="collapse"
+                    data-target="#products_collapse"
+                    aria-expanded="true" aria-controls="products_collapse">
+                <h5 class="my-1">Available products</h5>
+            </button>
 
             <div id="products_collapse" class="collapse" aria-labelledby="products_header"
                  data-parent="#stores_accordion">

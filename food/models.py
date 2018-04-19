@@ -68,11 +68,6 @@ class City(models.Model):
     state = models.ForeignKey(State, on_delete=models.CASCADE, null=True)
 
 
-class BusinessHours(models.Model):
-    name = models.CharField(max_length=50)
-    state = models.ForeignKey(State, on_delete=models.CASCADE, null=True)
-
-
 class Location(models.Model):
     name = models.CharField(max_length=100, blank=True)
     address = models.CharField(max_length=128)

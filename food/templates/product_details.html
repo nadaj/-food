@@ -156,15 +156,11 @@
     {% if product_in_stores %}
     <div class="accordion py-4" id="products_accordion">
         <div class="card">
-            <div class="card-header" id="availability_header">
-                <h5 class="mb-0 pale-green">
-                    <button class="btn btn-link avogreen-col" type="button" data-toggle="collapse"
-                            data-target="#store_availability_collapse"
-                            aria-expanded="true" aria-controls="store_availability_collapse">
-                        Store availability
-                    </button>
-                </h5>
-            </div>
+            <button class="btn btn-link avogreen-col" type="button" data-toggle="collapse"
+                    data-target="#store_availability_collapse"
+                    aria-expanded="true" aria-controls="store_availability_collapse">
+                <h5 class="my-1">Store availability</h5>
+            </button>
 
             <div id="store_availability_collapse" class="collapse" aria-labelledby="availability_header"
                  data-parent="#products_accordion">

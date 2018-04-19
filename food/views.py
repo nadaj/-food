@@ -54,7 +54,7 @@ def store_details(request, identifier):
         store = Store.objects.get(id=identifier)
         locations = Location.objects.filter(store__id=identifier).order_by("zip_code", "city__state__abbreviation")
         query = locations.query
-        return render(request, 'store_details.html', {"store": store, "locations": locations, "query": query})
+        return render(request, 'store_details.html', {"store": store, "locations": locations})
     else:
         return render(request, 'stores_list.html', {})
 

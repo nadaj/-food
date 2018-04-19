@@ -206,12 +206,24 @@ footer.footer {
   color: #ffffff!important;
 }
 
+.pale-white-bg {
+  background-color: #f7f7f7!important;
+}
+
+.pale-white {
+  color: #f7f7f7!important;
+}
+
 .pale-green, a.avogreen-col:hover {
   color:#97c94d!important;
 }
 
 .error-red {
   color:#c8180d!important;
+}
+
+.blackish {
+  color: #212529!important;
 }
 
 /****************************************
