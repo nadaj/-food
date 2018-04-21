@@ -194,6 +194,11 @@ footer.footer {
 .textcenter {
   text-align:center
 }
+
+a {
+  color:#495057!important;
+}
+
 /****************************************
 *****           COLORS              *****
 ****************************************/

@@ -61,10 +61,10 @@
                                 <td><b>Department:</b></td>
                                 <td>
                                     {% if departments and departments.0 is not None %}
-                                    <a href="#">{{ departments.0.name }}</a>
+                                    <a href="#" class="blackish">{{ departments.0.name }}</a>
                                     {% endif %}
                                     {% for department in departments|slice:"1:" %}
-                                    > <a href="#">{{ department.name }}</a>
+                                    > <a href="#" class="blackish">{{ department.name }}</a>
                                     {% endfor %}
                                 </td>
                             </tr>

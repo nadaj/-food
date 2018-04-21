@@ -79,7 +79,30 @@
             <div id="products_collapse" class="collapse" aria-labelledby="products_header"
                  data-parent="#stores_accordion">
                 <div class="card-body">
-                    <p>fsdf</p>
+                    <div class="card-deck">
+                        {% for product in products %}
+                        <div class="card">
+                            <a href="/products/{{ product.id }}">
+                                <img class="card-img-top img-fluid img-thumbnail" name="product-img"
+                                     style="width:100%"
+                                     src="{{product.image}}" alt="No image.">
+                            </a>
+                            <div class="card-body">
+                                <a class="blackish" href="/products/{{ product.id }}">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                </a>
+                                <p class="card-text">
+
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

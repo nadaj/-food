@@ -53,8 +53,8 @@ def store_details(request, identifier):
     if request.method == 'GET':
         store = Store.objects.get(id=identifier)
         locations = Location.objects.filter(store__id=identifier).order_by("zip_code", "city__state__abbreviation")
-        query = locations.query
-        return render(request, 'store_details.html', {"store": store, "locations": locations})
+        products = Product.objects.filter(productstore__store_id=identifier).order_by("productstore__updated_at")[:5]
+        return render(request, 'store_details.html', {"store": store, "locations": locations, "products": products})
     else:
         return render(request, 'stores_list.html', {})
 
