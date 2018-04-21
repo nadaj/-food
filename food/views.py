@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from django.db.models import Min, F
-from food.models import Product, Store, ProductStore, ProductDepartment, Location
+from food.services.product_service import ProductService
+from food.services.store_service import StoreService
 
 
 def index(request):
@@ -10,34 +10,19 @@ def index(request):
 
 def all_products(request):
     search_parameter = request.GET.get('search-products-bar')
-    products = Product.objects.values('productstore__product_id').annotate(brand_name=F('brand__name'),
-                                                                           price=Min('productstore__price'))
-    products = products.values()
     if search_parameter:
-        return products_search_list(request, products, search_parameter)
+        products = ProductService.filter_products_by_name(search_parameter)
+    else:
+        products = ProductService.all_products()
     return render(request, 'products_list.html', {"products": products})
 
 
-def products_search_list(request, products, search_parameter):
-    products = products.filter(name__icontains=search_parameter)
-    return render(request, 'products_list.html', {"products": products})
-
-
-def product_details(request, identifier):
+def product_details(request, product_id):
     if request.method == 'GET':
-        product = Product.objects.get(id=identifier)
+        product = ProductService.get_product_by_id(product_id)
         if product:
-            product_in_stores = ProductStore.objects.filter(product_id=identifier).order_by('price')
-            query = "SELECT T2.id, T2.name " \
-                    "FROM (" \
-                    "   SELECT @r AS _id, (SELECT @r := department_id " \
-                    "                      FROM food_productdepartment " \
-                    "                      WHERE id = _id) AS department_id, @l := @l + 1 AS lvl " \
-                    "   FROM (SELECT @r := '%d', @l := 0) vars, food_productdepartment " \
-                    "   WHERE @r <> 0) T1 " \
-                    "JOIN food_productdepartment T2 ON T1._id = T2.id " \
-                    "ORDER BY T1.lvl DESC" % product.department.id
-            departments = ProductDepartment.objects.raw(query)
+            product_in_stores = StoreService.product_in_stores(product_id)
+            departments = ProductService.get_departments_parents(product.department.id)
         return render(request, 'product_details.html',
                       {"product": product, "product_in_stores": product_in_stores, "departments": departments})
     else:
@@ -45,15 +30,15 @@ def product_details(request, identifier):
 
 
 def all_stores(request):
-    stores = Store.objects.all()
+    stores = StoreService.all_stores()
     return render(request, 'stores_list.html', {"stores": stores})
 
 
-def store_details(request, identifier):
+def store_details(request, store_id):
     if request.method == 'GET':
-        store = Store.objects.get(id=identifier)
-        locations = Location.objects.filter(store__id=identifier).order_by("zip_code", "city__state__abbreviation")
-        products = Product.objects.filter(productstore__store_id=identifier).order_by("productstore__updated_at")[:5]
+        store = StoreService.get_store_by_id(store_id)
+        locations = StoreService.all_store_locations(store_id)
+        products = StoreService.get_products_available_in_store(store)[:5]
         return render(request, 'store_details.html', {"store": store, "locations": locations, "products": products})
     else:
         return render(request, 'stores_list.html', {})
