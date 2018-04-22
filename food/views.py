@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from food.services.product_service import ProductService
 from food.services.store_service import StoreService
+from food.services.search_service import SearchEngine
 
 
 def index(request):
@@ -10,11 +11,16 @@ def index(request):
 
 def all_products(request):
     search_parameter = request.GET.get('search-products-bar')
+    res = None
     if search_parameter:
+        search_engine = SearchEngine()
+        SearchEngine.init_cached_keywords()
         products = ProductService.filter_products_by_name(search_parameter)
+        # res = search_engine.find(search_parameter)
+        res = search_engine.get_cache()
     else:
         products = ProductService.all_products()
-    return render(request, 'products_list.html', {"products": products})
+    return render(request, 'products_list.html', {"products": products, "res": res})
 
 
 def product_details(request, product_id):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from food.models import Product, ProductDepartment
+from food.models import Product, ProductDepartment, ProductSpecialty
 from django.db.models import Min, F
 
 
@@ -18,6 +18,15 @@ class ProductService:
         return products.filter(name__icontains=name)
 
     @classmethod
+    def filter_products_by_department(cls, department_id):
+        products = cls.all_products()
+        return products.filter(department_id=department_id)
+
+    @classmethod
+    def filter_products_by_specialty(cls, specialty):
+        return ProductSpecialty.objects.values_list('product_id', flat=True).filter(**specialty)
+
+    @classmethod
     def get_product_by_id(cls, product_id):
         return Product.objects.get(id=product_id)
 
@@ -33,3 +42,7 @@ class ProductService:
                 "JOIN food_productdepartment T2 ON T1._id = T2.id " \
                 "ORDER BY T1.lvl DESC" % department_id
         return ProductDepartment.objects.raw(query)
+
+    @classmethod
+    def get_all_existing_products_departments(cls):
+        return Product.objects.all().values_list('department_id', 'department__name').distinct()
