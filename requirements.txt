@@ -5,3 +5,4 @@ Django==2.0.3
 django-autofixture==0.12.1
 PyMySQL==0.8.0
 pytz==2018.3
+nltk==3.2.5

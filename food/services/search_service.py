@@ -4,9 +4,26 @@ from food.models import ProductSpecialty
 from .product_service import ProductService
 from .database_service import select_column_from_queryset
 import re
+from nltk.stem import PorterStemmer
+
+
+class LanguageProcessor:
+
+    def __init__(self):
+        self._stemmer = PorterStemmer()
+
+    def stem_word(self, word):
+        if "free" not in word:
+            return self._stemmer.stem(word)
+        return word
+
+    @staticmethod
+    def tokenize_by_word(term):
+        return re.findall(r"[a-zA-Z0-9']+", term)
 
 
 class SearchEngine:
+    _language_processor = LanguageProcessor()
 
     def __init__(self):
         """
@@ -16,12 +33,12 @@ class SearchEngine:
         self._cached_keywords = SearchEngine.init_cached_keywords()
 
     def lookup_cached_keywords(self, word):
-        if self._cached_keywords is not None:
-            return self._cached_keywords.get(word)
-        return None
+        if not self._cached_keywords:
+            return None
+        return self._cached_keywords.get(word)
 
     def find(self, search_string):
-        words = search_string.split()
+        words = LanguageProcessor.tokenize_by_word(search_string)
         sets_of_cached_words = []
 
         for word in words:
@@ -35,10 +52,6 @@ class SearchEngine:
             return None
 
     @staticmethod
-    def word_segmentation(term):
-        return re.findall(r"[\w']+", term)
-
-    @staticmethod
     @lru_cache(maxsize=2)
     def init_cached_keywords():
         cached_keyword_dictionary = {}
@@ -46,12 +59,14 @@ class SearchEngine:
         # CACHE DATA BY SPECIALTY
         specialties_keys = [value.name for value in ProductSpecialty._meta.fields if
                             value.name not in ['id', 'product_id', 'product']]
+
         specialties_filters = {}
         for key in specialties_keys:
             specialties_filters[key] = 1
             value = set(ProductService.filter_products_by_specialty(specialties_filters))
             if value:
-                cached_keyword_dictionary[key] = value
+                stemmed_key = SearchEngine._language_processor.stem_word(key)
+                cached_keyword_dictionary[stemmed_key] = value
             del specialties_filters[key]
 
         # CACHE DATA BY DEPARTMENTS
@@ -64,10 +79,11 @@ class SearchEngine:
                                             flat=True))
 
             processed_departments = [item for parent_department in parent_departments
-                                     for item in SearchEngine.word_segmentation(parent_department.name.lower())]
+                                     for item in LanguageProcessor.tokenize_by_word(parent_department.name.lower())]
 
             for processed_department in processed_departments:
-                cached_keyword_dictionary[processed_department] = products_in_department
+                stemmed_key = SearchEngine._language_processor.stem_word(processed_department)
+                cached_keyword_dictionary[stemmed_key] = products_in_department
 
         return cached_keyword_dictionary
 
