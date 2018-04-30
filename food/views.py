@@ -15,10 +15,9 @@ def all_products(request):
     if search_parameter:
         search_engine = SearchEngine()
         SearchEngine.init_cached_keywords()
-        products = ProductService.filter_products_by_name(search_parameter)
-        # res = search_engine.find(search_parameter)
+        # products = ProductService.filter_products_by_name(search_parameter)
+        products = search_engine.find(search_parameter)
         res = search_engine.get_cache()
-        # res = SearchEngine.tokenize_by_word(search_parameter)
     else:
         products = ProductService.all_products()
     return render(request, 'products_list.html', {"products": products, "res": res})

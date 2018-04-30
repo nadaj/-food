@@ -7,8 +7,8 @@ class ProductService:
 
     @classmethod
     def all_products(cls):
-        products = Product.objects.values('productstore__product_id').annotate(brand_name=F('brand__name'),
-                                                                               price=Min('productstore__price'))
+        products = Product.objects.values('productstore__product_id')
+        products = ProductService.annotate_with_price(products)
         products = products.values()
         return products
 
@@ -31,6 +31,18 @@ class ProductService:
         return Product.objects.get(id=product_id)
 
     @classmethod
+    def get_products_by_ids(cls, product_ids):
+        return Product.objects.filter(id__in=product_ids)
+
+    @classmethod
+    def get_products_by_brand_id(cls, brand_id):
+        return Product.objects.filter(brand_id=brand_id)
+
+    @classmethod
+    def annotate_with_price(cls, query_set):
+        return query_set.annotate(brand_name=F('brand__name'), price=Min('productstore__price'))
+
+    @classmethod
     def get_departments_parents(cls, department_id):
         query = "SELECT T2.id, T2.name " \
                 "FROM (" \
@@ -46,3 +58,12 @@ class ProductService:
     @classmethod
     def get_all_existing_products_departments(cls):
         return Product.objects.all().values_list('department_id', 'department__name').distinct()
+
+    @classmethod
+    def get_all_existing_products_names(cls):
+        return Product.objects.all().values_list('id', 'name').order_by('id')
+
+    @classmethod
+    def get_all_existing_brand_names(cls):
+        return Product.objects.all().values_list('brand_id', 'brand__name').distinct()
+
