@@ -5,6 +5,8 @@ from .product_service import ProductService
 from .database_service import select_column_from_queryset
 import re
 from nltk.stem import PorterStemmer
+from nltk.corpus import wordnet as wn
+import sys
 
 
 class LanguageProcessor:
@@ -22,8 +24,17 @@ class LanguageProcessor:
         return re.findall(r"[a-zA-Z0-9']+", term)
 
     @staticmethod
-    def normalize(term):
-        return re.sub(r"[']", '', term.lower())
+    def normalize(word):
+        return re.sub(r"[']", '', word.lower())
+
+    @staticmethod
+    def get_synonyms(word):
+        synonyms = []
+        for synset in wn.synsets(word):
+            lemmas = [lemma for lemma in synset.lemma_names() if lemma != word]
+            for lemma in lemmas:
+                synonyms.append(lemma)
+        return synonyms
 
 
 class SearchEngine:
@@ -36,40 +47,55 @@ class SearchEngine:
         """
         self._keywords = SearchEngine.init_cached_keywords()
 
-    def lookup_cached_keywords(self, word):
+    def find_synonyms(self, word):
+        synonyms = LanguageProcessor.get_synonyms(word)
+        synonym_set = set()
+        for synonym in synonyms:
+            splitted_synonym = LanguageProcessor.tokenize(synonym)
+            splitted_synonym_list = []
+            for value in splitted_synonym:
+                matched = self._keywords.get(value, set())
+                splitted_synonym_list.append(matched)
+            splitted_synonym_set = set.intersection(*splitted_synonym_list)
+            synonym_set.update(splitted_synonym_set)
+        return synonym_set
+
+    def lookup_cached_keywords(self, word, level):
         if not self._keywords:
             return None
 
-        matched_level_one = self._keywords.get(word)
-        if matched_level_one:
-            return matched_level_one
+        if level == 0:
+            matched = self._keywords.get(word, set())
+            matched_synonyms = self.find_synonyms(word)
+            matched.update(matched_synonyms)
+        else:
+            matched = [value for key, value in self._keywords.items() if key.startswith(word)] if level == 1 \
+                    else [value for key, value in self._keywords.items() if word in key]
+            if matched:
+                return set.union(*matched)
 
-        matched_level_two = [value for key, value in self._keywords.items() if key.startswith(word)]
-        if matched_level_two:
-            return set.union(*matched_level_two)
-
-        matched_level_three = [value for key, value in self._keywords.items() if word in key]
-        if matched_level_three:
-            return set.union(*matched_level_three)
-
-        return None
+        return matched if matched else None
 
     def find(self, search_string):
         words = LanguageProcessor.tokenize(search_string)
-        sets_of_cached_words = []
 
-        for word in words:
-            stemmed_word = self._language_processor.stem_word(word)
-            normalized_word = self._language_processor.normalize(stemmed_word)
-            found_set = self.lookup_cached_keywords(normalized_word)
-            if found_set:
+        for level in range(3):
+            sets_of_cached_words = []
+            for word in words:
+                stemmed_word = self._language_processor.stem_word(word)
+                normalized_word = self._language_processor.normalize(stemmed_word)
+                found_set = self.lookup_cached_keywords(normalized_word, level)
+                print(word + ": " + str(found_set) + "(" + str(level) + ")", file=sys.stderr)
+                if not found_set:
+                    found_set = set()
                 sets_of_cached_words.append(found_set)
 
-        if sets_of_cached_words:
-            product_ids = set.intersection(*sets_of_cached_words)
-            return ProductService.annotate_with_price(ProductService.get_products_by_ids(product_ids))
-        else:
-            return None
+            print(sets_of_cached_words, file=sys.stderr)
+            if sets_of_cached_words and bool(set.intersection(*sets_of_cached_words)):
+                product_ids = set.intersection(*sets_of_cached_words)
+                return ProductService.annotate_with_price(ProductService.get_products_by_ids(product_ids))
+
+        return None
 
     @staticmethod
     def insert_in_cache(cached_data, key, value):

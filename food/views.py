@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from food.services.product_service import ProductService
 from food.services.store_service import StoreService
-from food.services.search_service import SearchEngine
+from food.services.search_service import SearchEngine, LanguageProcessor
 
 
 def index(request):
@@ -18,9 +18,10 @@ def all_products(request):
         # products = ProductService.filter_products_by_name(search_parameter)
         products = search_engine.find(search_parameter)
         res = search_engine.get_cache()
+        synonyms = LanguageProcessor.get_synonyms("icecream")
     else:
         products = ProductService.all_products()
-    return render(request, 'products_list.html', {"products": products, "res": res})
+    return render(request, 'products_list.html', {"products": products, "res": res, "synonyms": synonyms})
 
 
 def product_details(request, product_id):
