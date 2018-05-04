@@ -3,9 +3,6 @@
 {% load static %}
 {% block content %}
 <div>
-    {{ res }}
-    <br/><br/>
-    {{ synonyms }}
     <div class="list-group">
         {% if products %}
         {% for product in products %}
@@ -40,5 +37,74 @@
         {% endfor %}
         {% endif %}
     </div>
+    {% if products.has_other_pages %}
+    <nav class="paginator-nav">
+        <ul class="pagination justify-content-center">
+            {% if products.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.previous_page_number }}">&laquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&laquo;</span>
+            </li>
+            {% endif %}
+
+            {% with total_num_pages=products.paginator.num_pages current_page=products.number %}
+
+            {% if current_page == 1 %}
+            <li class="page-item active">
+                <span class="page-link">1 <span class="sr-only">(current)</span></span>
+            </li>
+            {% if total_num_pages != 1 %}
+            {% add total_num_pages 1 as inc_total_1 %}
+            {% min 6 inc_total_1 as end_limit %}
+            {% range 2 end_limit as page_range %}
+            {% for page in page_range %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+            {% endfor %}
+            {% endif %}
+            {% elif current_page == total_num_pages %}
+            {% add total_num_pages -4 as sub_total_4 %}
+            {% max 1 sub_total_4 as start_limit %}
+            {% range start_limit total_num_pages as page_range %}
+            {% for page in page_range %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+            {% endfor %}
+            <li class="page-item active">
+                <span class="page-link">{{ total_num_pages }} <span class="sr-only">(current)</span></span>
+            </li>
+            {% else %}
+            {% generate_page_range current_page 5 as page_range %}
+            {% for page in page_range %}
+            {% if page == current_page %}
+            <li class="page-item active">
+                <span class="page-link">{{ page }} <span class="sr-only">(current)</span></span>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            {% if products.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.next_page_number }}">&raquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span>&raquo;</span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from food.services.product_service import ProductService
 from food.services.store_service import StoreService
 from food.services.search_service import SearchEngine, LanguageProcessor
@@ -11,16 +12,23 @@ def index(request):
 
 def all_products(request):
     search_parameter = request.GET.get('search-products-bar')
-    res = None
     if search_parameter:
         search_engine = SearchEngine()
         SearchEngine.init_cached_keywords()
-        # products = ProductService.filter_products_by_name(search_parameter)
         products = search_engine.find(search_parameter)
-        res = search_engine.get_cache()
     else:
         products = ProductService.all_products()
-    return render(request, 'products_list.html', {"products": products, "res": res})
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(products, 10)
+    try:
+        products_paginated = paginator.page(page)
+    except PageNotAnInteger:
+        products_paginated = paginator.page(1)
+    except EmptyPage:
+        products_paginated = paginator.page(paginator.num_pages)
+
+    return render(request, 'products_list.html', {"products": products_paginated})
 
 
 def product_details(request, product_id):
