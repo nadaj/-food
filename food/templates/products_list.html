@@ -40,17 +40,27 @@
     {% if products.has_other_pages %}
     <nav class="paginator-nav">
         <ul class="pagination justify-content-center">
-            {% if products.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ products.previous_page_number }}">&laquo;</a>
-            </li>
-            {% else %}
+            {% with total_num_pages=products.paginator.num_pages current_page=products.number %}
+
+            {% if current_page == 1 %}
             <li class="page-item disabled">
                 <span class="page-link">&laquo;</span>
             </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ 1 }}&search-products-bar={{ search_parameter }}">&laquo;</a>
+            </li>
             {% endif %}
-
-            {% with total_num_pages=products.paginator.num_pages current_page=products.number %}
+            {% if products.has_previous %}
+            <li class="page-item">
+                <a class="page-link"
+                   href="?page={{ products.previous_page_number }}&search-products-bar={{ search_parameter }}">&lsaquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&lsaquo;</span>
+            </li>
+            {% endif %}
 
             {% if current_page == 1 %}
             <li class="page-item active">
@@ -62,7 +72,7 @@
             {% range 2 end_limit as page_range %}
             {% for page in page_range %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                <a class="page-link" href="?page={{ page }}&search-products-bar={{ search_parameter }}">{{ page }}</a>
             </li>
             {% endfor %}
             {% endif %}
@@ -72,7 +82,7 @@
             {% range start_limit total_num_pages as page_range %}
             {% for page in page_range %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                <a class="page-link" href="?page={{ page }}&search-products-bar={{ search_parameter }}">{{ page }}</a>
             </li>
             {% endfor %}
             <li class="page-item active">
@@ -87,22 +97,32 @@
             </li>
             {% else %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                <a class="page-link" href="?page={{ page }}&search-products-bar={{ search_parameter }}">{{ page }}</a>
             </li>
             {% endif %}
             {% endfor %}
             {% endif %}
-            {% endwith %}
 
             {% if products.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ products.next_page_number }}">&raquo;</a>
+                <a class="page-link"
+                   href="?page={{ products.next_page_number }}&search-products-bar={{ search_parameter }}">&rsaquo;</a>
             </li>
             {% else %}
             <li class="page-item disabled">
-                <span>&raquo;</span>
+                <span class="page-link">&rsaquo;</span>
             </li>
             {% endif %}
+            {% if current_page == total_num_pages %}
+            <li class="page-item disabled">
+                <span class="page-link">&raquo;</span>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ total_num_pages }}&search-products-bar={{ search_parameter }}">&raquo;</a>
+            </li>
+            {% endif %}
+            {% endwith %}
         </ul>
     </nav>
     {% endif %}

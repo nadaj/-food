@@ -12,14 +12,18 @@ def index(request):
 
 def all_products(request):
     search_parameter = request.GET.get('search-products-bar')
+    page = request.GET.get('page', 1)
+
     if search_parameter:
         search_engine = SearchEngine()
         SearchEngine.init_cached_keywords()
         products = search_engine.find(search_parameter)
+        with open("cached_data.txt", "w") as file:
+            for key, value in search_engine.get_cache().items():
+                file.write(key + ": " + str(value) + "\n")
     else:
         products = ProductService.all_products()
 
-    page = request.GET.get('page', 1)
     paginator = Paginator(products, 10)
     try:
         products_paginated = paginator.page(page)
@@ -28,7 +32,7 @@ def all_products(request):
     except EmptyPage:
         products_paginated = paginator.page(paginator.num_pages)
 
-    return render(request, 'products_list.html', {"products": products_paginated})
+    return render(request, 'products_list.html', {"products": products_paginated, "search_parameter": search_parameter})
 
 
 def product_details(request, product_id):
