@@ -70,7 +70,7 @@ class SearchEngine:
             matched.update(matched_synonyms)
         else:
             matched = [value for key, value in self._keywords.items() if key.startswith(word)] if level == 1 \
-                    else [value for key, value in self._keywords.items() if word in key]
+                else [value for key, value in self._keywords.items() if word in key]
             if matched:
                 return set.union(*matched)
 
@@ -135,7 +135,8 @@ class SearchEngine:
         for brand in brand_names:
             brand_id = brand[0]
             brand_name = brand[1]
-            products = ProductService.get_products_by_brand_id(brand_id)
+            products = set(
+                select_column_from_queryset(ProductService.get_products_by_brand_id(brand_id), 'id', flat=True))
             for token in LanguageProcessor.tokenize(brand_name):
                 SearchEngine.insert_in_cache(cached_data, token, products)
 

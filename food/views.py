@@ -24,6 +24,10 @@ def all_products(request):
     else:
         products = ProductService.all_products()
 
+    if not products:
+        return render(request, 'products_list.html',
+                      {"products": None, "search_parameter": search_parameter})
+
     paginator = Paginator(products, 10)
     try:
         products_paginated = paginator.page(page)
