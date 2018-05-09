@@ -19,5 +19,13 @@ class SearchTestCase(TestCase):
         self.assertIsNotNone(self.search_engine.find('cereals'))
         self.assertIsNotNone(self.search_engine.find('cereal'))
 
-        self.assertIsNotNone(self.search_engine.find('smore'))
-        self.assertIsNotNone(self.search_engine.find("s'more"))
+        smore_results_1 = len(self.search_engine.find('smore'))
+        smore_results_2 = len(self.search_engine.find("s'more"))
+        self.assertTrue(smore_results_1 == smore_results_2)
+
+        icecream_results_1 = len(self.search_engine.find('icecream'))
+        icecream_results_2 = len(self.search_engine.find('ice-cream'))
+        icecream_results_3 = len(self.search_engine.find('ice cream'))
+        icecream_results_4 = len(self.search_engine.find('ice_cream'))
+        self.assertTrue(icecream_results_1 == icecream_results_2 == icecream_results_3 == icecream_results_4)
+
