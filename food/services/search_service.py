@@ -78,9 +78,11 @@ class SearchEngine:
 
     def find(self, search_string):
         words = LanguageProcessor.tokenize(search_string)
+        sets_of_cached_words = []
 
         for level in range(3):
-            sets_of_cached_words = []
+            if sets_of_cached_words:
+                sets_of_cached_words = []
             for word in words:
                 stemmed_word = self._language_processor.stem_word(word)
                 normalized_word = self._language_processor.normalize(stemmed_word)
@@ -91,9 +93,14 @@ class SearchEngine:
                 sets_of_cached_words.append(found_set)
 
             print(sets_of_cached_words, file=sys.stderr)
-            if sets_of_cached_words and bool(set.intersection(*sets_of_cached_words)):
+            if sets_of_cached_words:
                 product_ids = set.intersection(*sets_of_cached_words)
-                return ProductService.annotate_with_price(ProductService.get_products_by_ids(product_ids))
+                if product_ids:
+                    return ProductService.annotate_with_price(ProductService.get_products_by_ids(product_ids))
+
+        if sets_of_cached_words:
+            unified_product_ids = set.union(*sets_of_cached_words)
+            return ProductService.annotate_with_price(ProductService.get_products_by_ids(unified_product_ids))
 
         return None
 
