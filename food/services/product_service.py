@@ -40,7 +40,8 @@ class ProductService:
 
     @classmethod
     def annotate_with_price(cls, query_set):
-        return query_set.annotate(brand_name=F('brand__name'), price=Min('productstore__price'))
+        return query_set.annotate(brand_name=F('brand__name'), price=Min('productstore__price'),
+                                  created_at=F('productstore__created_at'))
 
     @classmethod
     def get_departments_parents(cls, department_id):
@@ -67,3 +68,17 @@ class ProductService:
     def get_all_existing_brand_names(cls):
         return Product.objects.all().values_list('brand_id', 'brand__name').distinct()
 
+    @classmethod
+    def sort_products(cls, products, sort_parameter):
+        if sort_parameter == 'name_asc_rank':
+            return products.extra(order_by=['name'])
+        elif sort_parameter == 'name_desc_rank':
+            return products.extra(order_by=['-name'])
+        elif sort_parameter == 'price_asc_rank':
+            return products.extra(order_by=['price'])
+        elif sort_parameter == 'price_desc_rank':
+            return products.extra(order_by=['-price'])
+        elif sort_parameter == 'date_desc_rank':
+            return products.extra(order_by=['-created_at'])
+
+        return products

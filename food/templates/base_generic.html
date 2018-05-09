@@ -24,38 +24,42 @@
     <link href="{% static 'css/generic.css' %}" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-light navbar-static-top">
-    <a class="navbar-brand" href="{% url 'index' %}"><img class="food-logo" src="{% static 'images/avocado.svg' %}"
-                                                          alt="#food"/></a>
-    <button id="main-toggler" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarTogglerMain"
-            aria-controls="navbarTogglerMain" aria-expanded="false">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<form id="search_products" name="search_products" action="{% url 'products' %}" method="GET" accept-charset="utf-8">
+    <nav class="navbar navbar-expand-md navbar-dark bg-light navbar-static-top">
+        <a class="navbar-brand" href="{% url 'index' %}"><img class="food-logo" src="{% static 'images/avocado.svg' %}"
+                                                              alt="#food"/></a>
+        <button id="main-toggler" class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarTogglerMain"
+                aria-controls="navbarTogglerMain" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerMain">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link white-col" href="{% url 'products' %}">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link white-col" href="{% url 'stores' %}">Stores</a>
-            </li>
-        </ul>
-        <form class="search-products-form p-2 d-flex">
-            <input class="form-control search-products-bar" name="search-products-bar"
-                   type="search" placeholder="Search products" aria-label="Search" value="{{ search_parameter }}">
-            <span class="search-toggle">
+        <div class="collapse navbar-collapse" id="navbarTogglerMain">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link white-col" href="{% url 'products' %}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link white-col" href="{% url 'stores' %}">Stores</a>
+                </li>
+            </ul>
+            <div class="search-products-form p-2 d-flex">
+                <!--<form class="search-products-form p-2 d-flex">-->
+                <input class="form-control search-products-bar" name="search-products-bar"
+                       type="search" placeholder="Search products" aria-label="Search" value="{{ search_parameter }}">
+                <span class="search-toggle">
                 <i id="open-search-icon" class="fas fa-search fa-fw fa-lg"></i>
                 <i id="close-search-icon" class="fas fa-times fa-fw fa-lg" style="padding-top:.4rem"></i>
             </span>
-        </form>
-        </ul>
-    </div>
-</nav>
+            </div>
+            <!--</form>-->
+            </ul>
+        </div>
+    </nav>
 
-<!-- Content -->
-{% block content %}{% endblock %}
+    <!-- Content -->
+    {% block content %}{% endblock %}
+</form>
 
 <!-- Footer -->
 <footer class="footer bg-light">

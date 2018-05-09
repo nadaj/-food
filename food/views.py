@@ -11,7 +11,12 @@ def index(request):
 
 
 def all_products(request):
+    sorting_values = zip(
+        ['Sort by:', 'Name: A-Z', 'Name: Z-A', 'Price: ascending', 'Price: descending', 'Newest arrivals'],
+        ['relevance', 'name_asc_rank', 'name_desc_rank', 'price_asc_rank', 'price_desc_rank',
+         'date_desc_rank'])
     search_parameter = request.GET.get('search-products-bar', '')
+    sort_parameter = request.GET.get('sort_products', 'relevance')
     page = request.GET.get('page', 1)
 
     if search_parameter:
@@ -22,23 +27,16 @@ def all_products(request):
         with open("cached_data.txt", "w") as file:
             for key, value in search_engine.get_cache().items():
                 file.write(key + ": " + str(value) + "\n")
-        with open("synonyms.txt", "w") as file:
-            file.write("non" + str(LanguageProcessor.get_synonyms("non")) + "\n")
-            file.write("no" + str(LanguageProcessor.get_synonyms("no")) + "\n")
-            file.write("free" + str(LanguageProcessor.get_synonyms("free")) + "\n")
-            file.write("without" + str(LanguageProcessor.get_synonyms("without")) + "\n")
-            file.write("wo" + str(LanguageProcessor.get_synonyms("wo")) + "\n")
-            file.write("w/o" + str(LanguageProcessor.get_synonyms("w/o")) + "\n")
-            file.write("dont" + str(LanguageProcessor.get_synonyms("dont")) + "\n")
-            file.write("do not" + str(LanguageProcessor.get_synonyms("do not")) + "\n")
-            file.write("don't" + str(LanguageProcessor.get_synonyms("don't")) + "\n")
-            file.write("not" + str(LanguageProcessor.get_synonyms("not")) + "\n")
     else:
         products = ProductService.all_products()
 
     if not products:
         return render(request, 'products_list.html',
-                      {"products": None, "search_parameter": search_parameter})
+                      {"products": None, "search_parameter": search_parameter, "sort_parameter": sort_parameter,
+                       "sorting_values": sorting_values})
+
+    if sort_parameter != 'relevance':
+        products = ProductService.sort_products(products, sort_parameter)
 
     paginator = Paginator(products, 10)
     try:
@@ -48,7 +46,8 @@ def all_products(request):
     except EmptyPage:
         products_paginated = paginator.page(paginator.num_pages)
 
-    return render(request, 'products_list.html', {"products": products_paginated, "search_parameter": search_parameter})
+    return render(request, 'products_list.html', {"products": products_paginated, "search_parameter": search_parameter,
+                                                  "sort_parameter": sort_parameter, "sorting_values": sorting_values})
 
 
 def product_details(request, product_id):

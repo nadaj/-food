@@ -5,6 +5,22 @@
 <div>
     <div class="list-group">
         {% if products %}
+        <div class="list-group-item no-border">
+            <div class="d-flex row align-items-center justify-content-end">
+                <div class=" col-sm-4 col-md-2">
+                    <select onchange="this.form.submit()" class="form-control" id="sort_products"
+                            name="sort_products">
+                        {% for name, value in sorting_values %}
+                        {% if sort_parameter == value %}
+                        <option value="{{ value }}" selected>{{ name }}</option>
+                        {% else %}
+                        <option value="{{ value }}">{{ name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
         {% for product in products %}
         <div id="product-listed" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex row">
