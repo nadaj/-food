@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from food.models import Product, Store, ProductStore, Location
+from food.models.product import Product
+from food.models.store import Store, Location
+from food.models.product_store import ProductStore
 
 
 class StoreService:

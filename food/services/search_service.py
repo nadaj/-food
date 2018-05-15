@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from functools import lru_cache
-from food.models import ProductSpecialty
+from food.models.product import ProductSpecialty
 from .product_service import ProductService
 from .database_service import select_column_from_queryset
 import re
 from nltk.stem import PorterStemmer
 from nltk.corpus import wordnet as wn
-import sys
+# import sys
 
 
 class LanguageProcessor:
@@ -87,12 +87,12 @@ class SearchEngine:
                 stemmed_word = self._language_processor.stem_word(word)
                 normalized_word = self._language_processor.normalize(stemmed_word)
                 found_set = self.lookup_cached_keywords(normalized_word, level)
-                print(word + ": " + str(found_set) + "(" + str(level) + ")", file=sys.stderr)
+                # print(word + ": " + str(found_set) + "(" + str(level) + ")", file=sys.stderr)
                 if not found_set:
                     found_set = set()
                 sets_of_cached_words.append(found_set)
 
-            print(sets_of_cached_words, file=sys.stderr)
+            # print(sets_of_cached_words, file=sys.stderr)
             if sets_of_cached_words:
                 product_ids = set.intersection(*sets_of_cached_words)
                 if product_ids:

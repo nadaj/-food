@@ -23,10 +23,10 @@ def all_products(request):
         search_engine = SearchEngine()
         SearchEngine.init_cached_keywords()
         products = search_engine.find(search_parameter)
-        # DEBUG
-        with open("cached_data.txt", "w") as file:
-            for key, value in search_engine.get_cache().items():
-                file.write(key + ": " + str(value) + "\n")
+        # # DEBUG
+        # with open("cached_data.txt", "w") as file:
+        #     for key, value in search_engine.get_cache().items():
+        #         file.write(key + ": " + str(value) + "\n")
     else:
         products = ProductService.all_products()
 

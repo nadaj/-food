@@ -29,6 +29,9 @@ class Product(models.Model):
     def metric_to_pounds(self):
         return Decimal(self.quantity_in_kilo) * Decimal('2.2')
 
+    class Meta:
+        ordering = ['id']
+
 
 class ProductSpecialty(models.Model):
     kosher = models.BooleanField(default=False)
@@ -46,45 +49,3 @@ class ProductSpecialty(models.Model):
         Product,
         on_delete=models.CASCADE,
     )
-
-
-class Store(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    description = models.TextField(default='')
-    created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(auto_now=True, null=True)
-    products = models.ManyToManyField(Product, through='ProductStore')
-    image = models.CharField(max_length=2083,
-                             default='https://s3.amazonaws.com/nadaj-food/store_images/No_Image_Available.gif')
-
-
-class State(models.Model):
-    name = models.CharField(max_length=15, unique=True)
-    abbreviation = models.CharField(max_length=2, unique=True)
-
-
-class City(models.Model):
-    name = models.CharField(max_length=50)
-    state = models.ForeignKey(State, on_delete=models.CASCADE, null=True)
-
-
-class Location(models.Model):
-    name = models.CharField(max_length=100, blank=True)
-    address = models.CharField(max_length=128)
-    zip_code = models.CharField(max_length=5)
-    phone = models.CharField(max_length=15, null=True)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
-
-
-class ProductStore(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    price_per_kilo = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(auto_now=True, null=True)
-
-    # to provide unique pair of product-store
-    class Meta:
-        unique_together = ('product', 'store')

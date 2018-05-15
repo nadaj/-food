@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from food.models import Product, ProductDepartment, ProductSpecialty
+from food.models.product import Product, ProductDepartment, ProductSpecialty
 from django.db.models import Min, F
 
 
